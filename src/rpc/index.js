@@ -5,16 +5,16 @@ const builderMap = require('../tl/builder');
 const Serializer = require('../tl/serializer');
 const Deserializer = require('../tl/deserializer');
 const {
-        xorBytes,
-        intsToLong,
-        concatBytes,
-        getRandomInt,
-        bytesIsEqual,
-        bigIntToBytes,
-        bytesToBigInt,
-        longToBytesRaw,
-        bytesToBytesRaw,
-      } = require('../utils/common');
+  xorBytes,
+  intsToLong,
+  concatBytes,
+  getRandomInt,
+  bytesIsEqual,
+  bigIntToBytes,
+  bytesToBigInt,
+  longToBytesRaw,
+  bytesToBytesRaw,
+} = require('../utils/common');
 const baseDebug = require('../utils/common/base-debug');
 const pqPrimeFactorization = require('../crypto/pq');
 
@@ -142,11 +142,11 @@ class RPC {
 
     const responsePQ = deserializer.predicate();
     const {
-            pq,
-            nonce,
-            server_nonce,
-            server_public_key_fingerprints,
-          } = responsePQ;
+      pq,
+      nonce,
+      server_nonce,
+      server_public_key_fingerprints,
+    } = responsePQ;
 
     if (!bytesIsEqual(this.nonce, nonce)) {
       throw new Error('The nonce are not equal');
@@ -357,7 +357,6 @@ class RPC {
 
     if (!bytesIsEqual(this.serverNonce, server_nonce)) {
       throw new Error('The server_nonce are not equal');
-
     }
 
     if (serverDHAnswer._ === 'mt_dh_gen_ok') {
@@ -612,9 +611,6 @@ class RPC {
 
     const { api_id, api_hash } = this.context;
 
-    // console.log('this.context')
-    // console.log(this.context)
-
     const initConnectionParams = {
       api_id,
       device_model: this.accData.device || '@mtproto/core',
@@ -626,7 +622,7 @@ class RPC {
     };
 
     const serializer = new Serializer(builderMap.invokeWithLayer, {
-      layer: 139,
+      layer: 158,
       query: {
         _: 'initConnection',
         ...initConnectionParams,
@@ -639,22 +635,11 @@ class RPC {
       },
     });
 
-    // console.log('serializer')
-    // console.log(serializer)
-
     const bytes = serializer.getBytes();
 
     return new Promise(async (resolve, reject) => {
-
-      // console.log('aaaaaaaaa')
-
       const messageId = await this.sendEncryptedMessage(bytes);
-
-      // console.log(messageId)
-
       const messageIdAsKey = intsToLong(messageId[0], messageId[1]);
-
-      // console.log(messageIdAsKey)
 
       this.messagesWaitResponse.set(messageIdAsKey, {
         method,

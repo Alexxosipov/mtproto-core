@@ -1,6 +1,6 @@
 {
   "name": "@mtproto/core",
-  "version": "6.2.0",
+  "version": "6.3.0",
   "description": "Telegram API JS (MTProto) client library for Node.js and browser",
   "keywords": [
     "telegram",
@@ -30,7 +30,7 @@
   ],
   "main": "./envs/node/index.js",
   "engines": {
-    "node": ">=12"
+    "node": ">=18"
   },
   "scripts": {
     "start": "jest --watch",
@@ -49,11 +49,11 @@
     "events": "3.3.0",
     "leemon": "6.2.0",
     "lodash.debounce": "4.0.8",
-    "pako": "2.0.4",
+    "pako": "2.1.0",
     "socks": "^2.6.2"
   },
   "devDependencies": {
-    "jest": "27.4.5",
+    "jest": "29.5.0",
     "npm-run-all": "4.1.5"
   }
 }
